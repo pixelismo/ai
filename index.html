@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixelismo · Tecnología que trabaja mientras vos vivís tu vida</title>
+  <meta name="description"
+    content="Desarrollo web, apps y asistentes de IA a medida para pymes que quieren escalar sin sumar stress. Automatizá lo repetitivo y recuperá tu tiempo." />
+  <meta name="keywords"
+    content="IA para pymes, automatización, asistente virtual, desarrollo web, apps a medida, Argentina" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Plus Jakarta Sans + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #fafaf9;
+      color: #1a1a18;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [id] {
+      scroll-margin-top: 80px;
+    }
+
+    .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* ── ACCENT ── */
+    .text-accent {
+      color: #da655c;
+    }
+
+    .bg-accent {
+      background-color: #da655c;
+    }
+
+    .bg-accent-muted {
+      background-color: #faf1f0;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar-glass {
+      background: rgba(250, 250, 249, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(218, 101, 92, 0.10);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .navbar-glass.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ── ANIMATED UNDERLINE for nav links ── */
+    .nav-link {
+      position: relative;
+      text-decoration: none;
+      color: #4a4a46;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: #da655c;
+      border-radius: 2px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-link:hover {
+      color: #da655c;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Footer links */
+    .footer-link {
+      position: relative;
+      text-decoration: none;
+      color: #9ca3af;
+      font-size: 0.875rem;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #da655c;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .footer-link:hover {
+      color: #da655c;
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    /* ── CTA BUTTON ── */
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #da655c;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      border-radius: 0.875rem;
+      transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+    }
+
+    .btn-accent:hover {
+      background: #b84840;
+      box-shadow: 0 8px 28px rgba(218, 101, 92, 0.38);
+      transform: translateY(-1px);
+    }
+
+    .btn-accent:active {
+      transform: translateY(0);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1.5px solid #e5e5e2;
+      color: #4a4a46;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      border-radius: 0.875rem;
+      background: transparent;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+    }
+
+    .btn-outline:hover {
+      border-color: #da655c;
+      color: #da655c;
+      background: #faf1f0;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.10s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.20s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.30s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.45s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      /*
+      background: linear-gradient(160deg, #fafaf9 0%, #fff7f6 55%, #faf1f0 100%);
+      */
+    }
+
+    /* ── HERO VIDEO WRAPPER ── */
+    .hero-video-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: visible;
+      background: #f0ebe8;
+    }
+
+    .hero-video-wrapper>video {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(218, 101, 92, 0.10);
+    }
+
+    /* ── STAT PILL ── */
+    .stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #1a1a18;
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      font-size: 0.72rem;
+      color: #888882;
+      text-align: center;
+      max-width: 90px;
+      line-height: 1.3;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #da655c;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1.5px solid #f2ccc9;
+      background: #faf1f0;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── SOLUTION BLOCKS ── */
+    .solution-block {
+      display: grid;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #eeeee9;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+
+    .solution-block:hover {
+      box-shadow: 0 12px 48px rgba(218, 101, 92, 0.12);
+      transform: translateY(-3px);
+    }
+
+    @media (min-width: 1024px) {
+      .layout-left {
+        grid-template-columns: 3fr 2fr;
+      }
+
+      .layout-right {
+        grid-template-columns: 2fr 3fr;
+      }
+    }
+
+    .solution-video-pane {
+      position: relative;
+      background: #f4f0ee;
+      min-height: 280px;
+      overflow: hidden;
+      max-height: 500px;
+    }
+
+    .solution-video-pane video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .solution-content-pane {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 1023px) {
+      .solution-video-pane {
+        min-height: 220px;
+      }
+
+      .solution-content-pane {
+        padding: 2rem 1.75rem;
+      }
+    }
+
+    /* ── FEATURE LIST ── */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+      color: #4a4a46;
+      line-height: 1.55;
+    }
+
+    .feature-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #da655c;
+      margin-top: 0.45rem;
+    }
+
+    /* ── BLOCK HEADINGS ── */
+    .block-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #da655c;
+      opacity: 0.8;
+    }
+
+    .block-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 2.5vw, 1rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: #1a1a18;
+    }
+
+    .block-divider {
+      width: 40px;
+      height: 2px;
+      background: #da655c;
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+    }
+
+    #mobile-menu.open {
+      max-height: 320px;
+      opacity: 1;
+    }
+
+    /* ── CHIPS ── */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #da655c;
+      background: #faf1f0;
+      border: 1px solid #f2ccc9;
+      border-radius: 999px;
+      padding: 0.3rem 0.75rem;
+    }
+
+    /* ── PROCESS CARDS ── */
+    .process-card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #eeeee9;
+      background: #fafaf9;
+    }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: linear-gradient(145deg, #da655c 0%, #c04f47 100%);
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+    }
+
+    /* ── WhatsApp btn ── */
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      border-radius: 0.875rem;
+      transition: opacity 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .btn-whatsapp:hover {
+      opacity: 0.9;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* ── GRADIENT TEXT ── */
+    .gradient-accent {
+      background: linear-gradient(135deg, #da655c 0%, #e8877f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── PULSE ── */
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .6;
+        transform: scale(.85)
+      }
+    }
+
+    .pulse-dot {
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111110;
+    }
+
+    /* ── PRE-DIAGNOSIS MODAL ── */
+    #prediag-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(15, 12, 10, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #prediag-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #prediag-panel {
+      background: #fff;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+      transform: translateY(28px) scale(0.97);
+      transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    h1 {
+      line-height: .9 !important;
+    }
+
+    #prediag-overlay.active #prediag-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .prediag-header {
+      background: linear-gradient(135deg, #da655c 0%, #c04f47 100%);
+      padding: 1.75rem 1.75rem 1.5rem;
+    }
+
+    .prediag-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    /* Custom checkbox */
+    .diag-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      cursor: pointer;
+      padding: 0.95rem 1rem;
+      border-radius: 12px;
+      border: 1.5px solid #eeeee9;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .diag-option:hover {
+      border-color: #f2ccc9;
+      background: #faf1f0;
+    }
+
+    .diag-option input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 1.5px solid #d1d1cc;
+      background: #fff;
+      cursor: pointer;
+      margin-top: 1px;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .diag-option input[type="checkbox"]:checked {
+      background: #da655c;
+      border-color: #da655c;
+    }
+
+    .diag-option input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5l3.5 3.5L11 1' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/10px no-repeat;
+    }
+
+    .diag-option.checked {
+      border-color: #f2ccc9;
+      background: #faf1f0;
+    }
+
+    .diag-option-label {
+      font-size: 0.875rem;
+      color: #1a1a18;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .diag-option-desc {
+      font-size: 0.78rem;
+      color: #888882;
+      margin-top: 0.1rem;
+      line-height: 1.35;
+    }
+
+    #prediag-comment {
+      width: 100%;
+      border: 1.5px solid #eeeee9;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #1a1a18;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fafaf9;
+    }
+
+    #prediag-comment::placeholder {
+      color: #aaa;
+    }
+
+    #prediag-comment:focus {
+      border-color: #da655c;
+      background: #fff;
+    }
+
+    #prediag-send {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    #prediag-send:hover {
+      opacity: 0.9;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      transform: translateY(-1px);
+    }
+
+    #titulo1,
+    #titulo2,
+    #titulo3 {
+      background: #ffffffe0;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+
+    #titulo1 {
+      position: absolute;
+      z-index: 9999;
+      left: 2rem;
+      bottom: 2rem;
+    }
+
+    #titulo2 {
+      position: absolute;
+      z-index: 9999;
+      right: 2rem;
+      top: 2rem;
+      background: #ffffff6e;
+    }
+
+    #titulo3 {
+      position: absolute;
+      z-index: 9999;
+      left: 2rem;
+      top: 2rem;
+    }
+
+    #titulo4 {
+      position: absolute;
+      z-index: 9999;
+      right: 2rem;
+      top: 2rem;
+    }
+
+
+
+    #prediag-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0.25rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    #prediag-close:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .prediag-warn {
+      display: none;
+      font-size: 0.78rem;
+      color: #da655c;
+      font-weight: 500;
+      margin-top: -0.4rem;
+    }
+
+    .prediag-warn.show {
+      display: block;
+    }
+
+    /* ── ABOUT card ── */
+    .about-card {
+      background: #fff;
+      border: 1px solid #eeeee9;
+      border-radius: 24px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .04);
+      overflow: hidden;
+    }
+
+    #contacto img,
+    video {
+      max-width: 100%;
+      height: auto;
+      position: absolute;
+      height: stretch;
+      width: inherit;
+      top: 0;
+      left: 0;
+    }
+
+    #contacto .contact-card {
+      background: #dddbdb;
+      background: linear-gradient(4deg, #cccac9 0%, #dedede 100%);
+      box-shadow: none;
+      border: none;
+      max-height: 700px;
+      border-radius: 0;
+    }
+
+    #contacto video {
+      max-width: 100%;
+      height: auto;
+      position: absolute;
+      height: stretch !important;
+      width: inherit;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <header class="navbar-glass fixed top-0 left-0 right-0 z-50" id="navbar">
+    <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
+
+      <a href="#" class="flex items-center gap-2.5 group" aria-label="Pixelismo inicio">
+        <div
+          class="w-8 h-8 rounded-xl bg-accent flex items-center justify-center shadow-sm group-hover:shadow-[0_4px_16px_rgba(218,101,92,.4)] transition-shadow duration-300">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1 1 .3 2.7-1.1 2.7H3.9c-1.4 0-2.1-1.7-1.1-2.7L4.2 15.3" />
+          </svg>
+        </div>
+        <span class="font-display font-bold text-[1.05rem] tracking-tight text-[#1a1a18]">Pixelismo<span
+            class="text-accent">.</span></span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-9">
+        <li><a href="#soluciones" class="nav-link">Soluciones</a></li>
+        <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+
+      <a href="#contacto" id="nav-cta" class="hidden md:inline-flex btn-accent text-sm px-5 py-2.5">
+        Hablemos
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+
+      <button id="mobile-toggle" aria-label="Abrir menú"
+        class="md:hidden p-2 rounded-xl text-[#4a4a46] hover:bg-[#faf1f0] hover:text-accent transition-colors">
+        <svg id="ham-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+        <svg id="close-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="md:hidden px-5 pb-4">
+      <ul class="flex flex-col gap-1 text-sm font-medium text-[#4a4a46] pt-2 border-t border-[#eeeee9]">
+        <li><a href="#soluciones"
+            class="block px-4 py-2.5 rounded-xl hover:bg-[#faf1f0] hover:text-accent transition-colors mobile-link">Soluciones</a>
+        </li>
+        <li><a href="#sobre-mi"
+            class="block px-4 py-2.5 rounded-xl hover:bg-[#faf1f0] hover:text-accent transition-colors mobile-link">Sobre
+            mí</a></li>
+        <li><a href="#contacto"
+            class="block px-4 py-2.5 rounded-xl hover:bg-[#faf1f0] hover:text-accent transition-colors mobile-link">Contacto</a>
+        </li>
+        <li class="pt-1"><a href="#contacto"
+            class="block text-center btn-accent px-4 py-3 text-sm justify-center mobile-link">Hablemos →</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ══ HERO ══ -->
+  <section id="hero" class="relative pt-[68px] min-h-screen flex items-center overflow-hidden">
+    <div
+      class="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-[#faf1f0] blur-[80px] opacity-70 pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-0 left-1/4 w-[300px] h-[300px] rounded-full bg-[#faf1f0] blur-[60px] opacity-50 pointer-events-none">
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 w-full py-20 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+        <div>
+          <div
+            class="inline-flex items-center gap-2 bg-white border border-[#f2ccc9] rounded-full px-4 py-1.5 text-xs font-semibold text-accent mb-7 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent pulse-dot"></span>
+            Disponible · Argentina
+          </div>
+
+          <h1
+            class="font-display font-extrabold text-[2.75rem] sm:text-[3.4rem] lg:text-[3.8rem] leading-[1.06] tracking-[-0.04em] text-[#1a1a18] mb-6">
+            Tecnología que trabaja<br />
+            <span class="gradient-accent">mientras vos</span><br />
+            vivís tu vida.
+          </h1>
+
+          <p class="text-[1.05rem] text-[#6b6b66] leading-relaxed max-w-lg mb-9">
+            Automatización, apps e IA a medida para pymes que quieren <strong
+              class="text-[#1a1a18] font-semibold">escalar sin sumar stress</strong>. Vos enfocate en tu negocio; la
+            tecnología se ocupa del resto.
+          </p>
+
+          <div class="flex flex-wrap gap-3 mb-10">
+            <button type="button" id="hero-cta-primary" onclick="openPreDiag()"
+              class="btn-accent text-[0.95rem] px-7 py-3.5">
+              Quiero recuperar mi tiempo
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+            <a href="#soluciones" id="hero-cta-secondary" class="btn-outline text-[0.95rem] px-7 py-3.5">
+              Ver soluciones
+            </a>
+          </div>
+
+          <div class="flex items-center gap-8 flex-wrap">
+            <div class="flex flex-col items-center gap-0.5">
+              <span class="stat-num">+15h</span>
+              <span class="stat-lbl">semanales recuperadas</span>
+            </div>
+            <div class="w-px h-8 bg-[#e5e5e2]"></div>
+            <div class="flex flex-col items-center gap-0.5">
+              <span class="stat-num">24/7</span>
+              <span class="stat-lbl">operación automática</span>
+            </div>
+            <div class="w-px h-8 bg-[#e5e5e2]"></div>
+            <div class="flex flex-col items-center gap-0.5">
+              <span class="stat-num">0</span>
+              <span class="stat-lbl">código de tu parte</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center lg:justify-end">
+          <div class="hero-video-wrapper w-full max-w-[520px]">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="vids/s1.mp4" type="video/mp4" />
+            </video>
+            <div
+              class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg border border-[#eeeee9] px-3.5 py-2.5 flex items-center gap-2 text-xs font-semibold text-[#1a1a18] z-10">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+              Asistente en línea
+            </div>
+            <div
+              class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-lg border border-[#eeeee9] px-3.5 py-2.5 text-xs font-semibold text-[#1a1a18] z-10">
+              ⚡ Responde en 2 seg
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ STATS BAR ══ -->
+  <section class="bg-white border-y border-[#eeeee9] py-12 reveal">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="font-display font-extrabold text-[2.2rem] text-accent mb-1">+40%</div>
+          <div class="text-xs text-[#888882] leading-snug">Menos tiempo en tareas repetitivas</div>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-[2.2rem] text-[#1a1a18] mb-1">+ clientes.</div>
+          <div class="text-xs text-[#888882] leading-snug">Cerrá ventas mientras dormís</div>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-[2.2rem] text-accent mb-1">100%</div>
+          <div class="text-xs text-[#888882] leading-snug">Soporte personalizado post-entrega</div>
+        </div>
+        <div>
+          <div class="font-display font-extrabold text-[2.2rem] text-[#1a1a18] mb-1">+ Relax</div>
+          <div class="text-xs text-[#888882] leading-snug">Más tiempo para disfrutar.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ SOLUCIONES — 4 BLOQUES VERTICALES ══ -->
+  <section id="soluciones" class="py-28 bg-[#fafaf9]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+
+      <div class="max-w-xl mb-20 reveal">
+        <div class="section-label">Soluciones</div>
+        <h2
+          class="font-display font-extrabold text-[2.4rem] sm:text-[3rem] leading-[1.08] tracking-[-0.04em] text-[#1a1a18]">
+          Cuatro problemas reales.<br />
+          <span class="gradient-accent">Cuatro soluciones concretas.</span>
+        </h2>
+        <p class="mt-4 text-[#6b6b66] text-[1rem] leading-relaxed">
+          Herramientas digitales que alivian la carga operativa y devuelven tiempo a quienes dirigen pymes.
+        </p>
+      </div>
+
+      <!-- BLOCK 1 -->
+      <div class="solution-block layout-left mb-20 reveal">
+        <div class="solution-video-pane order-1">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="vids/s1.mp4" type="video/mp4" />
+          </video>
+          <div id="titulo1">
+            <div class="block-number">01 — Atención al cliente</div>
+            <h3 class="block-title mt-1">Tu negocio responde<br />las 24 horas.</h3>
+            <div class="block-divider mt-4"></div>
+          </div>
+        </div>
+
+        <div class="solution-content-pane order-2">
+
+          <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+            Un asistente de IA conectado a tu catálogo, precios y stock que responde en segundos, sin que tengas que
+            estar presente.
+          </p>
+          <ul class="feature-list">
+            <li>Respuestas instantáneas en WhatsApp, web o Instagram</li>
+            <li>Conectado a tu catálogo y stock en tiempo real</li>
+            <li>Agenda visitas o toma pedidos de forma autónoma</li>
+            <li>Escala sin límites: cientos de consultas simultáneas</li>
+            <li>Sin código de tu parte; te lo configuramos y mantenemos</li>
+          </ul>
+          <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+        </div>
+      </div>
+
+      <!-- BLOCK 2 -->
+      <div class="solution-block layout-right mb-20 reveal">
+        <div class="solution-content-pane order-2 lg:order-1">
+          <div id="titulo2">
+            <div class="block-number">02 — Reportes e Inteligencia</div>
+            <h3 class="block-title mt-1">Tu resumen diario,<br />listo antes del café.</h3>
+            <div class="block-divider mt-4"></div>
+          </div>
+          <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+            A las 7:30 AM te llega un resumen claro con ventas, stock crítico, pedidos pendientes y margen del mes.
+          </p>
+          <ul class="feature-list">
+            <li>Reporte diario por WhatsApp o email sin abrir Excel</li>
+            <li>Alertas de stock crítico y anomalías en tiempo real</li>
+            <li>Integrado con tu sistema de facturación actual</li>
+            <li>Visualizaciones claras para tomar decisiones rápidas</li>
+            <li>Personalizable: vos elegís qué métricas importan</li>
+          </ul>
+          <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+        </div>
+        <div class="solution-video-pane order-1 lg:order-2">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="vids/s3.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <!-- BLOCK 3 -->
+      <div class="solution-block layout-left mb-20 reveal">
+        <div class="solution-video-pane order-1">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="vids/agentes.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div id="titulo3">
+          <div class="block-number">03 — Integración de Sistemas</div>
+          <h3 class="block-title mt-1">Todas tus herramientas,<br />un solo flujo.</h3>
+          <div class="block-divider mt-4"></div>
+        </div>
+        <div class="solution-content-pane order-2">
+
+          <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+            Conectamos tu facturación, stock, CRM y canales de comunicación para que la información fluya sola entre
+            sistemas.
+          </p>
+          <ul class="feature-list">
+            <li>Facturación, CRM y stock sincronizados automáticamente</li>
+            <li>WhatsApp, email y redes en un único flujo de datos</li>
+            <li>Eliminación de carga manual duplicada entre planillas</li>
+            <li>Agente de voz que responde por WhatsApp y llamadas</li>
+            <li>Implementación sin interrumpir tu operación actual</li>
+          </ul>
+          <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+        </div>
+      </div>
+
+      <!-- BLOCK 4 -->
+      <div class="solution-block layout-right reveal">
+        <div class="solution-content-pane order-2 lg:order-1">
+          <div>
+            <div class="block-number">04 — Automatización de Flujos</div>
+            <h3 class="block-title mt-1">Pedidos, seguimientos<br />y recordatorios solos.</h3>
+            <div class="block-divider mt-4"></div>
+          </div>
+          <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+            Flujos de trabajo automáticos que se activan solos: sin que tengas que tocarlos, sin errores, sin olvidos.
+          </p>
+          <ul class="feature-list">
+            <li>Confirmación automática de pedidos y envíos</li>
+            <li>Recordatorios de cobro y seguimiento post-venta</li>
+            <li>Altas de clientes y onboarding sin fricción manual</li>
+            <li>Gestión de turnos y agenda 100% automatizada</li>
+            <li>Notificaciones internas cuando algo requiere atención</li>
+          </ul>
+          <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+        </div>
+        <div class="solution-video-pane order-1 lg:order-2">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="vids/familia.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══ CÓMO OPERA ══ -->
+  <section id="como-opera" class="py-28 bg-white">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+
+      <div class="text-center max-w-2xl mx-auto mb-20 reveal">
+        <div class="section-label">El proceso</div>
+        <h2
+          class="font-display font-extrabold text-[2.4rem] sm:text-[3rem] leading-[1.08] tracking-[-0.04em] text-[#1a1a18]">
+          Sin fricción,<br />sin tecnicismos.
+        </h2>
+        <p class="mt-4 text-[#6b6b66] text-[1rem]">Así es el camino desde tu problema hasta la solución funcionando.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="process-card reveal reveal-delay-1">
+          <div class="w-11 h-11 rounded-xl bg-accent flex items-center justify-center mb-5 shadow-sm">
+            <span class="font-display font-extrabold text-white">1</span>
+          </div>
+          <h3 class="font-display font-bold text-[#1a1a18] mb-2 text-[0.97rem]">Diagnóstico express</h3>
+          <p class="text-[#6b6b66] text-sm leading-relaxed">Una charla de 30 min donde mapeamos dónde se te va el tiempo
+            real.</p>
+        </div>
+        <div class="process-card reveal reveal-delay-2">
+          <div class="w-11 h-11 rounded-xl bg-[#1a1a18] flex items-center justify-center mb-5 shadow-sm">
+            <span class="font-display font-extrabold text-white">2</span>
+          </div>
+          <h3 class="font-display font-bold text-[#1a1a18] mb-2 text-[0.97rem]">Propuesta sin rebusques</h3>
+          <p class="text-[#6b6b66] text-sm leading-relaxed">La solución exacta, el costo y el plazo en lenguaje de
+            negocio.</p>
+        </div>
+        <div class="process-card reveal reveal-delay-3">
+          <div class="w-11 h-11 rounded-xl bg-accent flex items-center justify-center mb-5 shadow-sm">
+            <span class="font-display font-extrabold text-white">3</span>
+          </div>
+          <h3 class="font-display font-bold text-[#1a1a18] mb-2 text-[0.97rem]">Desarrollo ágil</h3>
+          <p class="text-[#6b6b66] text-sm leading-relaxed">Iteraciones cortas con feedback constante. Avances reales
+            desde la semana 1.</p>
+        </div>
+        <div class="process-card reveal reveal-delay-4">
+          <div class="w-11 h-11 rounded-xl bg-[#1a1a18] flex items-center justify-center mb-5 shadow-sm">
+            <span class="font-display font-extrabold text-white">4</span>
+          </div>
+          <h3 class="font-display font-bold text-[#1a1a18] mb-2 text-[0.97rem]">Entrega + soporte real</h3>
+          <p class="text-[#6b6b66] text-sm leading-relaxed">La solución queda andando, con documentación y soporte
+            continuo.</p>
+        </div>
+      </div>
+
+      <div class="mt-14 bg-[#faf1f0] border border-[#f2ccc9] rounded-3xl p-10 text-center reveal">
+        <p class="font-display font-semibold text-[1.2rem] sm:text-[1.4rem] text-[#1a1a18] leading-snug italic">
+          "No pagues por tecnología; invertí en<span class="gradient-accent not-italic font-extrabold">tiempo
+            libre</span><br class="hidden sm:inline" /> y tranquilidad operativa para dueños de negocio."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══ SOBRE MÍ ══ -->
+  <section id="sobre-mi" class="py-28 bg-[#fafaf9]">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+      <div class="about-card">
+        <div class="grid lg:grid-cols-2">
+          <div
+            class="relative bg-[#f4f0ee] min-h-[320px] lg:min-h-full flex items-center justify-center overflow-hidden">
+            <img src="img/mascot.jpg" alt="Pixelismo - Desarrollador freelance"
+              class="w-full h-full object-cover object-top" loading="lazy" />
+            <div class="absolute top-5 right-5 chip">💻 Dev Frontend</div>
+            <div class="absolute bottom-5 left-5 chip">🤖 IA / Agentes</div>
+          </div>
+          <div class="p-10 lg:p-14 flex flex-col justify-center gap-5 reveal">
+            <div>
+              <div class="section-label">Sobre mí</div>
+              <h2
+                class="font-display font-extrabold text-[2rem] sm:text-[2.4rem] leading-[1.1] tracking-[-0.04em] text-[#1a1a18]">
+                En el cruce entre<br />
+                <span class="gradient-accent">código, diseño<br />y negocio.</span>
+              </h2>
+            </div>
+            <div class="space-y-3.5 text-[0.92rem] text-[#6b6b66] leading-relaxed">
+              <p>Soy desarrollador freelance especializado en construir herramientas digitales que generan impacto real
+                en negocios pequeños y medianos. Entiendo la operativa del día a día porque trabajé con dueños de pymes
+                desde el primer minuto.</p>
+              <p>Me gusta analizar tus problemas y pensar en soluciones que te hagan la vida más facil</p>
+              <p class="font-semibold text-[#1a1a18]">Me pongo la camiseta de tu Pyme para que tu sueño no se convierta
+                en tu enemigo.
+                El tiempo es lo mas valioso que tenés. Mejor invertilo en tu familia y amigos, mientras tu empresa
+                trabaja para vos.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip">React / Next.js</span>
+              <span class="chip">Agentes de IA</span>
+              <span class="chip">APIs &amp; Integraciones</span>
+              <span class="chip">Automatización</span>
+              <span class="chip">UX / Diseño</span>
+              <span class="chip">Python / Node.js</span>
+            </div>
+            <a href="#contacto" class="btn-accent text-sm px-6 py-3 self-start">Hablemos del proyecto →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ CONTACTO ══ -->
+  <section id="contacto" class="">
+    <div class="">
+      <div class="contact-card p-10 md:p-16 text-center reveal">
+        <div class="relative z-10">
+          <div
+            class="inline-flex items-center gap-2 bg-black/15 border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-white mb-7 backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 pulse-dot"></span>
+            Respondo en menos de 24 horas hábiles
+          </div>
+          <h2
+            class="font-display font-extrabold text-[2.4rem] sm:text-[3rem] text-white leading-[1.08] tracking-[-0.04em] mb-5">
+            ¿Listo para dejar de<br />hacer todo a mano?
+          </h2>
+          <p class="text-black/75 text-[1rem] leading-relaxed max-w-xl mx-auto mb-10">
+            Contame brevemente cuál es la tarea que más tiempo te roba. En 24 horas te cuento cómo podría automatizarse.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button type="button" id="whatsapp-cta" onclick="openPreDiag()"
+              class="btn-whatsapp text-sm font-bold px-7 py-3.5">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Escribime por WhatsApp
+            </button>
+            <a href="mailto:hola@pixelismo.com" id="email-cta"
+              class="inline-flex items-center justify-center gap-2.5 bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold px-7 py-3.5 rounded-[0.875rem] transition-all duration-200 text-sm backdrop-blur-sm">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Enviar un email
+            </a>
+          </div>
+
+
+        </div>
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="vids/s4.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══ PRE-DIAGNOSIS MODAL ══ -->
+  <div id="prediag-overlay" role="dialog" aria-modal="true" aria-labelledby="prediag-title"
+    onclick="handlePreDiagOverlay(event)">
+    <div id="prediag-panel" onclick="event.stopPropagation()">
+
+      <!-- Header -->
+      <div class="prediag-header">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div
+              class="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white/90 mb-3">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Estimación rápida · Gratis
+            </div>
+            <h2 id="prediag-title"
+              class="font-display font-extrabold text-white text-[1.3rem] leading-tight tracking-tight">
+              Contame qué necesita<br />resolver tu pyme
+            </h2>
+          </div>
+          <button id="prediag-close" onclick="closePreDiag()" aria-label="Cerrar">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <p class="text-white/70 text-xs mt-2 leading-relaxed">
+          Seleccioná las áreas donde querés sumar eficiencia y te armo una propuesta a medida:
+        </p>
+      </div>
+
+      <!-- Body -->
+      <div class="prediag-body">
+
+        <!-- Checkboxes -->
+        <div class="flex flex-col gap-2" id="prediag-checks">
+
+          <label class="diag-option" for="diag-1">
+            <input type="checkbox" id="diag-1" name="diag"
+              value="Automatizar atención al cliente (WhatsApp / Web Chat 24/7)">
+            <div>
+              <div class="diag-option-label">🤖 Atención al cliente 24/7</div>
+              <div class="diag-option-desc">WhatsApp o Agente de voz que responde solo, sin que estés presente.</div>
+            </div>
+          </label>
+
+          <label class="diag-option" for="diag-2">
+            <input type="checkbox" id="diag-2" name="diag" value="Reportes automáticos y analítica matutina">
+            <div>
+              <div class="diag-option-label">📊 Reportes automáticos y analítica</div>
+              <div class="diag-option-desc">Resumen diario de ventas, stock y alertas antes de empezar el día.</div>
+            </div>
+          </label>
+
+          <label class="diag-option" for="diag-3">
+            <input type="checkbox" id="diag-3" name="diag"
+              value="Desarrollo de software o app a medida (Android / Web)">
+            <div>
+              <div class="diag-option-label">💻 App o software a medida</div>
+              <div class="diag-option-desc">Desarrollo Android, web o panel interno para tu operación.</div>
+            </div>
+          </label>
+
+          <label class="diag-option" for="diag-4">
+            <input type="checkbox" id="diag-4" name="diag" value="Optimización de base de datos o flujos internos">
+            <div>
+              <div class="diag-option-label">⚡ Optimización de flujos internos</div>
+              <div class="diag-option-desc">Automatizar pedidos, cobros, stock o cualquier proceso repetitivo.</div>
+            </div>
+          </label>
+
+        </div>
+
+        <p id="prediag-warn" class="prediag-warn">Por favor seleccioná al menos una opción para continuar.</p>
+
+        <!-- Comment -->
+        <div>
+          <label for="prediag-comment" class="block text-xs font-semibold text-[#4a4a46] mb-1.5">Comentario adicional
+            <span class="font-normal text-[#888882]">(opcional)</span></label>
+          <textarea id="prediag-comment" rows="2"
+            placeholder="Ej: Tengo una ferretería y quiero automatizar los presupuestos por WhatsApp..."></textarea>
+        </div>
+
+        <!-- Send button -->
+        <button id="prediag-send" type="button" onclick="sendPreDiag()">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          Enviar por WhatsApp
+        </button>
+
+        <p class="text-center text-[0.72rem] text-[#888882] -mt-1">Te redirigimos a WhatsApp con tu consulta armada. Sin
+          spam, sin formularios eternos.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="py-12">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-7">
+        <a href="#" class="flex items-center gap-2.5" aria-label="Pixelismo inicio">
+          <div class="w-7 h-7 rounded-xl bg-accent flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1 1 .3 2.7-1.1 2.7H3.9c-1.4 0-2.1-1.7-1.1-2.7L4.2 15.3" />
+            </svg>
+          </div>
+          <span class="font-display font-bold text-white text-[1rem]">Pixelismo<span class="text-accent">.</span></span>
+        </a>
+        <nav class="flex flex-wrap gap-7 justify-center">
+          <a href="#soluciones" class="footer-link">Soluciones</a>
+          <a href="#como-opera" class="footer-link">Cómo opera</a>
+          <a href="#sobre-mi" class="footer-link">Sobre mí</a>
+          <a href="#contacto" class="footer-link">Contacto</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="https://wa.me/5491100000000" target="_blank" rel="noopener noreferrer"
+            class="w-9 h-9 bg-[#1f1f1d] hover:bg-[#25D366] rounded-xl flex items-center justify-center transition-colors duration-200"
+            aria-label="WhatsApp">
+            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+            class="w-9 h-9 bg-[#1f1f1d] hover:bg-accent rounded-xl flex items-center justify-center transition-colors duration-200"
+            aria-label="LinkedIn">
+            <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-[#1f1f1d] mt-8 pt-7 text-center text-xs text-[#4a4a46]">
+        © 2026 Pixelismo · Desarrollado con ♥ en Argentina · Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══ JAVASCRIPT ══ -->
+  <script>
+      // ── Scroll reveal ──
+      (function () {
+        const els = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(el => io.observe(el));
+      })();
+
+    // ── Navbar shadow on scroll ──
+    (function () {
+      const nav = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 24);
+      }, { passive: true });
+    })();
+
+    // ── Mobile menu ──
+    (function () {
+      const btn = document.getElementById('mobile-toggle');
+      const menu = document.getElementById('mobile-menu');
+      const ham = document.getElementById('ham-icon');
+      const close = document.getElementById('close-icon');
+      const links = document.querySelectorAll('.mobile-link');
+      function toggle(open) {
+        menu.classList.toggle('open', open);
+        ham.classList.toggle('hidden', open);
+        close.classList.toggle('hidden', !open);
+      }
+      btn.addEventListener('click', () => toggle(!menu.classList.contains('open')));
+      links.forEach(l => l.addEventListener('click', () => toggle(false)));
+    })();
+
+    // ── PRE-DIAGNOSIS MODAL ──
+    const WA_NUMBER = '5491163759287';
+
+    function openPreDiag() {
+      const overlay = document.getElementById('prediag-overlay');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Reset state
+      document.querySelectorAll('#prediag-checks input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+        cb.closest('.diag-option').classList.remove('checked');
+      });
+      document.getElementById('prediag-comment').value = '';
+      document.getElementById('prediag-warn').classList.remove('show');
+    }
+
+    function closePreDiag() {
+      document.getElementById('prediag-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handlePreDiagOverlay(e) {
+      if (e.target === document.getElementById('prediag-overlay')) closePreDiag();
+    }
+
+    // Toggle checked style on label
+    document.querySelectorAll('.diag-option input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', function () {
+        this.closest('.diag-option').classList.toggle('checked', this.checked);
+        // Hide warning if at least one is now checked
+        if (this.checked) document.getElementById('prediag-warn').classList.remove('show');
+      });
+    });
+
+    function sendPreDiag() {
+      const selected = [...document.querySelectorAll('#prediag-checks input[type="checkbox"]:checked')]
+        .map(cb => '  ✅ ' + cb.value);
+
+      if (selected.length === 0) {
+        document.getElementById('prediag-warn').classList.add('show');
+        return;
+      }
+
+      const comment = document.getElementById('prediag-comment').value.trim();
+
+      let msg = '¡Hola! Vi tu web y me interesa lo que hacés. Te cuento mis necesidades:\n\n';
+      msg += selected.join('\n');
+      if (comment) msg += '\n\n📝 Comentario adicional:\n' + comment;
+      msg += '\n\n¿Podés contarme más sobre cómo me podés ayudar?';
+
+      const url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      closePreDiag();
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePreDiag();
+    });
+  </script>
+
+</body>
+
+</html>
