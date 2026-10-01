@@ -761,6 +761,10 @@
       top: 0;
       left: 0;
     }
+
+    #sobre-mi .solution-video-pane {
+      max-height: none !important;
+    }
   </style>
 </head>
 
@@ -1132,12 +1136,10 @@
     <div class="max-w-5xl mx-auto px-5 sm:px-8">
       <div class="about-card">
         <div class="grid lg:grid-cols-2">
-          <div
-            class="relative bg-[#f4f0ee] min-h-[320px] lg:min-h-full flex items-center justify-center overflow-hidden">
-            <img src="img/mascot.jpg" alt="Pixelismo - Desarrollador freelance"
-              class="w-full h-full object-cover object-top" loading="lazy" />
-            <div class="absolute top-5 right-5 chip">💻 Dev Frontend</div>
-            <div class="absolute bottom-5 left-5 chip">🤖 IA / Agentes</div>
+          <div class="solution-video-pane order-1 lg:order-2">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="vids/tiempolibre.mp4" type="video/mp4" />
+            </video>
           </div>
           <div class="p-10 lg:p-14 flex flex-col justify-center gap-5 reveal">
             <div>
