@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixelismo · Tecnología que trabaja mientras vos vivís tu vida</title>
+    <meta name="description"
+        content="Desarrollo web, apps y asistentes de IA a medida para pymes que quieren escalar sin sumar stress. Automatizá lo repetitivo y recuperá tu tiempo." />
+    <meta name="keywords"
+        content="IA para pymes, automatización, asistente virtual, desarrollo web, apps a medida, Argentina" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="estilos.css" rel="stylesheet" />
+
+    <!-- GSAP Core y ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Matter"', 'sans-serif'],
+                        body: ['"Matter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:not(.hero) {
+            position: relative;
+            z-index: 10;
+            /* Hace que quede por encima de la capa del hero */
+            background-color: #fff;
+            /* O el color de fondo de tu web para tapar el hero si quedó abajo */
+        }
+
+        .hero-content {
+            max-width: 450px;
+            z-index: 2;
+        }
+
+        .hero-cards {
+            position: relative;
+            width: 450px;
+            /* Tamaño del contenedor base del mazo */
+            height: 250px;
+            margin-top: -50px !important;
+        }
+
+        .card {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            border-radius: 16px;
+
+            /* Para que el navegador renderice suave la pila en 3D */
+            transform-origin: center center;
+            will-change: transform, opacity;
+        }
+
+        /* Distribución de la pila: cada tarjeta se desfasa levemente en Top/Right y ángulo */
+        .card:nth-child(1) {
+
+            right: 0px;
+            transform: rotate(-2deg);
+        }
+
+        .card:nth-child(2) {
+
+            right: -20px;
+            transform: rotate(3deg);
+        }
+
+        .card:nth-child(3) {
+
+            right: 15px;
+            transform: rotate(-4deg);
+        }
+
+        .card:nth-child(4) {
+
+            right: -10px;
+            transform: rotate(2deg);
+        }
+
+        .card:nth-child(5) {
+
+            right: 20px;
+            transform: rotate(-3deg);
+        }
+
+        .card:nth-child(6) {
+
+            right: -25px;
+            transform: rotate(4deg);
+        }
+
+        .card:nth-child(7) {
+
+            right: 5px;
+            transform: rotate(-2deg);
+        }
+
+        .card:nth-child(8) {
+
+            right: -15px;
+            transform: rotate(3deg);
+        }
+
+        .card:nth-child(9) {
+
+            right: 20px;
+            transform: rotate(-5deg);
+        }
+
+        .card:nth-child(10) {
+
+            right: -5px;
+            transform: rotate(2deg);
+        }
+
+        .card:nth-child(11) {
+
+            right: 18px;
+            transform: rotate(-3deg);
+        }
+
+        .card:nth-child(12) {
+
+            right: -25px;
+            transform: rotate(4deg);
+        }
+
+        .card img {
+            max-width: 70%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ NAVBAR ══ -->
+    <header class="navbar-glass fixed top-0 left-0 right-0 z-50" id="navbar">
+        <nav id="logo_header" class="max-w-6xl mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
+
+            <a href="/" class="flex items-center gap-2.5 group" aria-label="Pixelismo inicio">
+                <img src="logo.svg" alt="Pixelismo">
+            </a>
+
+            <ul class=" hidden md:flex items-center gap-9">
+                <li><a href="#soluciones" class="nav-link">Soluciones</a></li>
+                <li><a href="#" class="nav-link">WebDesign</a></li>
+                <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+
+            <a href="#contacto" id="nav-cta" class="hidden md:inline-flex btn-accent text-sm px-5 py-2.5">
+                Hablemos
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a>
+
+            <button id="mobile-toggle" aria-label="Abrir menú"
+                class="md:hidden p-2 rounded-xl text-[#4a4a46] hover:bg-[#faf1f0] hover:text-accent transition-colors">
+                <svg id="ham-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+                <svg id="close-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden px-5 pb-4">
+            <ul class="flex flex-col gap-1 text-sm font-medium text-[#4a4a46] pt-2 border-t border-[#eeeee9]">
+                <li><a href="#soluciones"
+                        class="block px-4 py-2.5 rounded-xl hover:bg-[#faf1f0] hover:text-accent transition-colors mobile-link">Soluciones</a>
+                </li>
+                <li><a href="#sobre-mi"
+                        class="block px-4 py-2.5 rounded-xl hover:bg-[#faf1f0] hover:text-accent transition-colors mobile-link">Sobre
+                        mí</a></li>
+                <li><a href="#contacto"
+                        class="block px-4 py-2.5 rounded-xl hover:bg-[#faf1f0] hover:text-accent transition-colors mobile-link">Contacto</a>
+                </li>
+                <li class="pt-1"><a href="#contacto"
+                        class="block text-center btn-accent px-4 py-3 text-sm justify-center mobile-link">Hablemos →</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 bg-white border border-[#f2ccc9] rounded-full px-4 py-1.5 text-xs font-semibold text-accent mb-7 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-accent pulse-dot"></span>
+                    Disponible · Argentina
+                </div>
+
+                <h1
+                    class="Matter6 text-[2.75rem] sm:text-[3.4rem] lg:text-[3.8rem] leading-[1.06] tracking-[-0.04em] text-[#1a1a18] mb-6">
+                    Te ayudamos a encontrar<br />
+                    <span class="gradient-accent">la mejor forma</span><br />
+                    de vender.
+                </h1>
+
+                <p class="text-[1.05rem] text-[#6b6b66] leading-relaxed max-w-lg mb-9">
+                    En Pixelismo diseñamos tiendas online, catálogos y sistemas de pedidos pensados para que tu
+                    producto se luzca y vender se vuelva más simple.
+                </p>
+
+                <div class="flex flex-wrap gap-3 mb-10">
+                    <button type="button" id="hero-cta-primary" onclick="openPreDiag()"
+                        class="btn-accent text-[0.95rem] px-7 py-3.5">
+                        Quiero recuperar mi tiempo
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </button>
+                    <a href="#soluciones" id="hero-cta-secondary" class="btn-outline text-[0.95rem] px-7 py-3.5">
+                        Ver soluciones
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-8 flex-wrap">
+                    <div class="flex flex-col items-center gap-0.5">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-lbl">personalizado</span>
+                    </div>
+                    <div class="w-px h-8 bg-[#e5e5e2]"></div>
+                    <div class="flex flex-col items-center gap-0.5">
+                        <span class="stat-num">85%</span>
+                        <span class="stat-lbl">de conversión</span>
+                    </div>
+                    <div class="w-px h-8 bg-[#e5e5e2]"></div>
+                    <div class="flex flex-col items-center gap-0.5">
+                        <span class="stat-num">99%</span>
+                        <span class="stat-lbl">de los clientes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-cards">
+            <div class="card card-1"><img src="templates/templates/1.jpg" alt="Template 1"></div>
+            <div class="card card-2"><img src="templates/templates/2.jpg" alt="Template 2"></div>
+            <div class="card card-3"><img src="templates/templates/3.jpg" alt="Template 3"></div>
+            <div class="card card-13"><img src="templates/templates/4.jpg" alt="Template 4"></div>
+            <div class="card card-4"><img src="templates/templates/5.jpg" alt="Template 5"></div>
+            <div class="card card-5"><img src="templates/templates/6.jpg" alt="Template 6"></div>
+            <div class="card card-6"><img src="templates/templates/7.jpg" alt="Template 7"></div>
+            <div class="card card-7"><img src="templates/templates/8.jpg" alt="Template 8"></div>
+            <div class="card card-8"><img src="templates/templates/9.jpg" alt="Template 9"></div>
+            <div class="card card-9"><img src="templates/templates/10.jpg" alt="Template 10"></div>
+            <div class="card card-10"><img src="templates/templates/11.jpg" alt="Template 11"></div>
+            <div class="card card-11"><img src="templates/templates/12.jpg" alt="Template 12"></div>
+            <div class="card card-12"><img src="templates/templates/13.jpg" alt="Template 13"></div>
+
+
+        </div>
+    </section>
+
+    <!-- El resto de tu página -->
+
+    <!-- ══ STATS BAR ══ -->
+    <section class="bg-white border-y border-[#eeeee9] py-12 reveal content-section">
+        <div class="max-w-5xl mx-auto px-5 sm:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="font-display font-extrabold text-[2.2rem] text-accent mb-1">+40%</div>
+                    <div class="text-xs text-[#888882] leading-snug">Menos tiempo en tareas repetitivas</div>
+                </div>
+                <div>
+                    <div class="font-display font-extrabold text-[2.2rem] text-[#1a1a18] mb-1">+ clientes.</div>
+                    <div class="text-xs text-[#888882] leading-snug">Cerrá ventas mientras dormís</div>
+                </div>
+                <div>
+                    <div class="font-display font-extrabold text-[2.2rem] text-accent mb-1">100%</div>
+                    <div class="text-xs text-[#888882] leading-snug">Soporte personalizado post-entrega</div>
+                </div>
+                <div>
+                    <div class="font-display font-extrabold text-[2.2rem] text-[#1a1a18] mb-1">+ Relax</div>
+                    <div class="text-xs text-[#888882] leading-snug">Más tiempo para disfrutar.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="soluciones" class="py-28 bg-[#fafaf9]">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
+
+            <div class="max-w-xl mb-20 reveal">
+                <div class="section-label">Soluciones</div>
+                <h2
+                    class="font-display font-extrabold text-[2.4rem] sm:text-[3rem] leading-[1.08] tracking-[-0.04em] text-[#1a1a18]">
+                    Cuatro problemas reales.<br />
+                    <span class="gradient-accent">Cuatro soluciones concretas.</span>
+                </h2>
+                <p class="mt-4 text-[#6b6b66] text-[1rem] leading-relaxed">
+                    Herramientas digitales que alivian la carga operativa y devuelven tiempo a quienes dirigen pymes.
+                </p>
+            </div>
+
+            <!-- BLOCK 1 -->
+            <div class="solution-block layout-left mb-20 reveal">
+                <div class="solution-video-pane order-1">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="vids/s1.mp4" type="video/mp4" />
+                    </video>
+                    <div id="titulo1">
+                        <div class="block-number">01 — Atención al cliente</div>
+                        <h3 class="block-title mt-1">Tu negocio responde las 24 horas.</h3>
+                        <div class="block-divider mt-4"></div>
+                    </div>
+                </div>
+
+                <div class="solution-content-pane order-2">
+
+                    <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+                        Un asistente de IA conectado a tu catálogo, precios y stock que responde en segundos, sin que
+                        tengas que
+                        estar presente.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Respuestas instantáneas en WhatsApp, web o Instagram</li>
+                        <li>Conectado a tu catálogo y stock en tiempo real</li>
+                        <li>Agenda visitas o toma pedidos de forma autónoma</li>
+                        <li>Escala sin límites: cientos de consultas simultáneas</li>
+                        <li>Sin código de tu parte; te lo configuramos y mantenemos</li>
+                    </ul>
+                    <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+                </div>
+            </div>
+
+            <!-- BLOCK 2 -->
+            <div class="solution-block layout-right mb-20 reveal">
+                <div class="solution-content-pane order-2 lg:order-1">
+                    <div id="titulo2">
+                        <div class="block-number">02 — Reportes e Inteligencia</div>
+                        <h3 class="block-title mt-1">Tu resumen diario, listo antes del café.</h3>
+                        <div class="block-divider mt-4"></div>
+                    </div>
+                    <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+                        A las 7:30 AM te llega un resumen claro con ventas, stock crítico, pedidos pendientes y margen
+                        del mes.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Reporte diario por WhatsApp o email sin abrir Excel</li>
+                        <li>Alertas de stock crítico y anomalías en tiempo real</li>
+                        <li>Integrado con tu sistema de facturación actual</li>
+                        <li>Visualizaciones claras para tomar decisiones rápidas</li>
+                        <li>Personalizable: vos elegís qué métricas importan</li>
+                    </ul>
+                    <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+                </div>
+                <div class="solution-video-pane order-1 lg:order-2">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="vids/s3.mp4" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+
+            <!-- BLOCK 3 -->
+            <div class="solution-block layout-left mb-20 reveal">
+                <div class="solution-video-pane order-1">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="vids/agentes.mp4" type="video/mp4" />
+                    </video>
+                </div>
+                <div id="titulo3">
+                    <div class="block-number">03 — Integración de Sistemas</div>
+                    <h3 class="block-title mt-1">Todas tus herramientas, un solo flujo.</h3>
+                    <div class="block-divider mt-4"></div>
+                </div>
+                <div class="solution-content-pane order-2">
+
+                    <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+                        Conectamos tu facturación, stock, CRM y canales de comunicación para que la información fluya
+                        sola entre
+                        sistemas.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Facturación, CRM y stock sincronizados automáticamente</li>
+                        <li>WhatsApp, email y redes en un único flujo de datos</li>
+                        <li>Eliminación de carga manual duplicada entre planillas</li>
+                        <li>Agente de voz que responde por WhatsApp y llamadas</li>
+                        <li>Implementación sin interrumpir tu operación actual</li>
+                    </ul>
+                    <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+                </div>
+            </div>
+
+            <!-- BLOCK 4 -->
+            <div class="solution-block layout-right reveal">
+                <div class="solution-content-pane order-2 lg:order-1">
+                    <div>
+                        <div class="block-number">04 — Automatización de Flujos</div>
+                        <h3 class="block-title mt-1">Pedidos, seguimientos<br />y recordatorios solos.</h3>
+                        <div class="block-divider mt-4"></div>
+                    </div>
+                    <p class="text-[0.9rem] text-[#6b6b66] leading-relaxed">
+                        Flujos de trabajo automáticos que se activan solos: sin que tengas que tocarlos, sin errores,
+                        sin olvidos.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Confirmación automática de pedidos y envíos</li>
+                        <li>Recordatorios de cobro y seguimiento post-venta</li>
+                        <li>Altas de clientes y onboarding sin fricción manual</li>
+                        <li>Gestión de turnos y agenda 100% automatizada</li>
+                        <li>Notificaciones internas cuando algo requiere atención</li>
+                    </ul>
+                    <a href="#contacto" class="btn-accent text-sm px-5 py-2.5 self-start">Quiero esto →</a>
+                </div>
+                <div class="solution-video-pane order-1 lg:order-2">
+                    <video autoplay muted loop playsinline preload="metadata">
+                        <source src="vids/familia.mp4" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <svg class="custom-cursor" id="cursor" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="4">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="2" fill="#00ffcc" />
+    </svg>
+    <script>
+        const cursor = document.getElementById('cursor');
+
+        // 3. Escuchar el movimiento del mouse para actualizar la posición
+        window.addEventListener('mousemove', (e) => {
+            // Usamos transform para mejor rendimiento de renderizado (60fps)
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+    </script>
+</body>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const cards = document.querySelectorAll('.hero-cards .card');
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "center center",
+            end: "+=1500",       // Aumentamos la distancia para dar tiempo al trayecto completo
+            scrub: 1,            // Suavidad atada al scroll
+            pin: true,           // Mantiene fija la sección durante todo el recorrido
+            pinSpacing: true,
+            anticipatePin: 1,
+            onLeave: () => {
+                // Fuerza un recalculo rápido por si el DOM cambió de altura
+                // ScrollTrigger.refresh();
+            }
+        }
+    });
+
+    // Animar cada tarjeta: Entrada -> Pausa/Aparición -> Salida hacia arriba
+    cards.forEach((card, index) => {
+        // 1. ENTRADA: Desde abajo hacia su posición central en la pila
+        tl.from(card, {
+            y: 800,               // Entra bien desde abajo fuera de pantalla
+            right: -400,
+            opacity: .4,
+            scale: 0.4,
+            duration: 1,
+            ease: "power1.out"
+        }, index * 0.5)         // Tiempos desfasados entre cada tarjeta
+
+            // 2. SALIDA: Continúa subiendo y desaparece por arriba
+            .to(card, {
+                y: -1000,              // Sale hacia arriba fuera de la pantalla
+                right: -200,
+                opacity: 0,
+                scale: 0.5,
+                duration: .45,
+                ease: "power3.in"
+            }, `+=0`);            // +=0.3 le da un pequeño "hold" / tiempo visible en el centro
+    });
+</script>
+
+<script>
+    // ── Scroll reveal ──
+    (function () {
+        const els = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(el => io.observe(el));
+    })();
+
+    // ── Navbar shadow on scroll ──
+    (function () {
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 24);
+        }, { passive: true });
+    })();
+
+    // ── Mobile menu ──
+    (function () {
+        const btn = document.getElementById('mobile-toggle');
+        const menu = document.getElementById('mobile-menu');
+        const ham = document.getElementById('ham-icon');
+        const close = document.getElementById('close-icon');
+        const links = document.querySelectorAll('.mobile-link');
+        function toggle(open) {
+            menu.classList.toggle('open', open);
+            ham.classList.toggle('hidden', open);
+            close.classList.toggle('hidden', !open);
+        }
+        btn.addEventListener('click', () => toggle(!menu.classList.contains('open')));
+        links.forEach(l => l.addEventListener('click', () => toggle(false)));
+    })();
+
+    // ── PRE-DIAGNOSIS MODAL ──
+    const WA_NUMBER = '5491163759287';
+
+    function openPreDiag() {
+        const overlay = document.getElementById('prediag-overlay');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        // Reset state
+        document.querySelectorAll('#prediag-checks input[type="checkbox"]').forEach(cb => {
+            cb.checked = false;
+            cb.closest('.diag-option').classList.remove('checked');
+        });
+        document.getElementById('prediag-comment').value = '';
+        document.getElementById('prediag-warn').classList.remove('show');
+    }
+
+    function closePreDiag() {
+        document.getElementById('prediag-overlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function handlePreDiagOverlay(e) {
+        if (e.target === document.getElementById('prediag-overlay')) closePreDiag();
+    }
+
+    // Toggle checked style on label
+    document.querySelectorAll('.diag-option input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function () {
+            this.closest('.diag-option').classList.toggle('checked', this.checked);
+            // Hide warning if at least one is now checked
+            if (this.checked) document.getElementById('prediag-warn').classList.remove('show');
+        });
+    });
+
+    function sendPreDiag() {
+        const selected = [...document.querySelectorAll('#prediag-checks input[type="checkbox"]:checked')]
+            .map(cb => '  ✅ ' + cb.value);
+
+        if (selected.length === 0) {
+            document.getElementById('prediag-warn').classList.add('show');
+            return;
+        }
+
+        const comment = document.getElementById('prediag-comment').value.trim();
+
+        let msg = '¡Hola! Vi tu web y me interesa lo que hacés. Te cuento mis necesidades:\n\n';
+        msg += selected.join('\n');
+        if (comment) msg += '\n\n📝 Comentario adicional:\n' + comment;
+        msg += '\n\n¿Podés contarme más sobre cómo me podés ayudar?';
+
+        const url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank', 'noopener,noreferrer');
+        closePreDiag();
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closePreDiag();
+    });
+</script>
+
+</html>
