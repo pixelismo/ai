@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template de email para Gmail - Diego</title>
+  <!--
+  INSTRUCCIONES DE USO (no se envía):
+  1. Abrí este archivo en Chrome y copiá todo (Ctrl+A, Ctrl+C) para pegarlo en Gmail, o usalo como plantilla en Gmail > Configuración > Plantillas.
+  2. Reemplazá los campos entre {{ }} por los datos de cada prospecto de tu planilla.
+  3. Borrá el bloque que no corresponda: [SIN WEB] o [WEB VIEJA].
+  Asuntos sugeridos (elegí uno):
+   - Una idea para {{NOMBRE_NEGOCIO}} en {{CIUDAD}}
+   - Vi {{NOMBRE_NEGOCIO}} en Google Maps y te preparé una propuesta
+   - ¿Modernizamos la web de {{NOMBRE_NEGOCIO}} + automatización?
+-->
+</head>
+
+<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:Arial, Helvetica, sans-serif;color:#1e293b;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+    style="background-color:#f1f5f9;padding:24px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0"
+          style="max-width:600px;width:100%;background-color:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+
+          <!-- HEADER -->
+          <tr style="background: url('https://pixelismo.github.io/ai/img/header_mail.jpeg');background-size: cover;">
+            <td style="background-color:transparent;padding:28px 32px; height: 200px;     display: flex;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr style="
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+">
+                  <td style="color:#ffffff;font-size:22px;font-weight:bold;line-height:1.2;"><img
+                      src="https://pixelismo.github.io/ai/logo_pixelismo.png" style="width: 100px;" Logo
+                      Pixelismo"><span style="color:#38bdf8;">.</span><br></td>
+                  <td style="    color: #505357;
+    font-size: 42px;
+    letter-spacing: -2px;
+    font-weight: bolder;
+    line-height: 40px;
+    margin-top: 50px;">
+                    Diseño Web + IA<br>en Santa Cruz</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- HERO -->
+          <tr>
+            <td style="padding:32px 32px 8px 32px;">
+              <p
+                style="margin:0 0 8px 0;font-size:13px;color:#fc6183;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">
+                Propuesta para {{RUBRO}}</p>
+              <h1 style="margin:0 0 16px 0;font-size:26px;line-height:1.25;color:#0f172a;">Hola {{NOMBRE_CONTACTO}}, vi
+                <span style="color:#fc6183;">{{NOMBRE_NEGOCIO}}</span> en {{CIUDAD}} y tengo una idea para conseguirles
+                más clientes.
+              </h1>
+              <p style="margin:0;font-size:16px;line-height:1.6;color:#475569;">Soy Diego, diseñador y programador de
+                Río Gallegos. Ayudo a pymes y locales de Santa Cruz a tener una web que venda y a automatizar tareas
+                repetitivas con IA.</p>
+            </td>
+          </tr>
+
+          <!-- DIAGNOSTICO DINAMICO -->
+          <tr>
+            <td style="padding:20px 32px 0 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #e6e6e6;
+        border-radius: 8px;">
+                <tr>
+                  <td style="padding:18px 20px;">
+                    <p style="margin:0 0 8px 0;font-size:14px;font-weight:bold;color:#a4969d;">🔍 Lo que noté de
+                      {{NOMBRE_NEGOCIO}}:</p>
+                    <p style="margin:0;font-size:14px;line-height:1.6;color:#a4969d;">
+                      <!-- [SIN WEB] Borrar si tiene web -->
+                      Hoy aparecen en Google Maps pero <strong>no tienen una web propia</strong> donde el cliente pueda
+                      ver servicios, precios y contactarlos en un clic. Están perdiendo consultas frente a competidores
+                      que sí tienen.<br><br>
+                      <!-- [WEB VIEJA] Borrar si no tiene web -->
+                      Tienen web, pero <strong>{{DETALLE_WEB: no se adapta bien al celular / se ve desactualizada /
+                        carga lenta}}</strong>. Hoy más del 80% busca desde el teléfono y una web vieja genera
+                      desconfianza.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- PROPUESTA COMBINADA -->
+          <tr>
+            <td style="padding:24px 32px 0 32px;">
+              <h2 style="margin:0 0 16px 0;font-size:18px;color:#0f172a;">Mi propuesta combinada para ustedes:</h2>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="50%" valign="top" style="padding-right:8px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                      style="border:1px solid #e2e8f0;border-radius:12px;">
+                      <tr>
+                        <td style="padding:18px;">
+                          <p style="margin:0 0 6px 0;font-size:20px;">🌐</p>
+                          <p style="margin:0 0 8px 0;font-size:15px;font-weight:bold;color:#0f172a;">1. Web profesional
+                          </p>
+                          <p style="margin:0;font-size:13px;line-height:1.6;color:#475569;">Nueva o modernizada, rápida,
+                            adaptada al celular, con botón directo a WhatsApp, mapa y reseñas de Google.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td width="50%" valign="top" style="padding-left:8px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #ffffff;">
+                      <tr>
+                        <td style="padding:18px;">
+                          <p style="margin:0 0 6px 0;font-size:20px;">🤖</p>
+                          <p style="margin:0 0 8px 0;font-size:15px;font-weight:bold;color:#0f172a;">2. Automatización
+                            con IA</p>
+                          <p style="margin:0;font-size:13px;line-height:1.6;color:#475569;">{{EJEMPLO_IA: respuestas
+                            automáticas en WhatsApp / turnos online / presupuestos en minutos / seguimiento de
+                            consultas}} para ahorrar tiempo todos los días.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;">
+                <tr>
+                  <td style="font-size:14px;line-height:1.7;color:#334155;">
+                    ✓ Más consultas desde Google<br>
+                    ✓ Imagen profesional que genera confianza<br>
+                    ✓ Menos tareas manuales y respuestas más rápidas
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CTA -->
+          <tr>
+            <td align="center" style="padding:28px 32px 8px 32px;">
+              <a href="https://wa.me/{{TU_WHATSAPP}}?text=Hola%20Diego,%20soy%20de%20{{NOMBRE_NEGOCIO}},%20quiero%20info%20de%20la%20propuesta"
+                style="display:inline-block;background-color:#fc6183;color:#ffffff;text-decoration:none;font-size:16px;font-weight:bold;padding:14px 28px;border-radius:999px;">Quiero
+                una charla de 15 min sin costo →</a>
+              <p style="margin:12px 0 0 0;font-size:13px;color:#64748b;">O respondeme este mail y te envío ejemplos y
+                presupuesto orientativo.</p>
+            </td>
+          </tr>
+
+          <!-- CIERRE -->
+          <tr>
+            <td style="padding:16px 32px 28px 32px;">
+              <p style="margin:0;font-size:14px;line-height:1.6;color:#475569;">¿Te sirve que te prepare una mini
+                muestra de cómo quedaría la web de {{NOMBRE_NEGOCIO}}? Te la armo sin compromiso.</p>
+              <p style="margin:16px 0 0 0;font-size:14px;line-height:1.6;color:#1e293b;">Gracias por tu
+                tiempo,<br><strong>Diego</strong><br><span style="color:#64748b;font-size:13px;">Diseño, Programación e
+                  IA para pymes — Río Gallegos, Santa Cruz</span></p>
+              <p style="margin:16px 0 0 0;font-size:12px;color:#94a3b8;">P.D.: Trabajo con locales de {{CIUDAD}} y la
+                zona. Si ya están evaluando opciones, te paso referencias y plazos claros por escrito.</p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="background-color:#f8fafc;padding:18px 32px;border-top:1px solid #e2e8f0;">
+              <p style="margin:0;font-size:12px;line-height:1.5;color:#94a3b8;text-align:center;">Este mensaje fue
+                enviado a {{NOMBRE_NEGOCIO}} por una oportunidad detectada en Google Maps.<br>Si no es de tu interés,
+                disculpá la molestia — no vuelvo a escribir.</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

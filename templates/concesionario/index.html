@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VERITAS Motor — Concesionario Premium de Vehículos</title>
+  <meta name="description" content="Agencia premium de compra y venta de vehículos. Inventario selecto, tasación sin cargo y asesoría directa sin intermediarios." />
+  <meta name="keywords" content="concesionario premium, compra venta autos usados, vehículos alta gama, tasación gratuita, Buenos Aires" />
+  <meta property="og:title" content="VERITAS Motor — Concesionario Premium" />
+  <meta property="og:description" content="Doce unidades. Proceso de selección riguroso. Sin vendedores, sin presión." />
+  <meta property="og:type" content="website" />
+
+  <!-- Phosphor Icons (stroke, no emojis) -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <!-- Tipografía: Instrument Serif (editorial) + Geist Sans (UI) + Geist Mono (meta) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient blob: posición fija, sin interacción, opacidad 0.03 -->
+  <div class="ambient-blob" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════ NAVIGATION ═══════════════════════════ -->
+  <header class="nav" id="site-header" role="banner">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" id="nav-logo" aria-label="VERITAS Motor — inicio">
+        <span class="logo-serif">V</span><span class="logo-sans">ERITAS</span>
+      </a>
+
+      <nav class="nav__menu" id="main-nav" role="navigation" aria-label="Navegación principal">
+        <a href="#inventario" class="nav__link" id="nav-inventory">Inventario</a>
+        <a href="#tasacion"   class="nav__link" id="nav-appraisal">Tasación</a>
+        <a href="#contacto"   class="nav__link" id="nav-contact">Contacto</a>
+      </nav>
+
+      <a href="#tasacion" class="btn btn--solid btn--sm" id="nav-cta">Tasar mi auto</a>
+
+      <button class="nav__burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+        <i class="ph ph-list" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════ HERO ══════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Modelo destacado">
+
+      <div class="hero__layout">
+
+        <!-- Columna editorial izquierda -->
+        <div class="hero__copy">
+          <span class="overline" id="hero-overline">Modelo destacado — 2025</span>
+          <h1 class="hero__title" id="hero-title">
+            Mercedes&#8209;AMG<br /><em>GT 63&nbsp;S</em>
+          </h1>
+
+          <!-- Specs strip -->
+          <dl class="hero__specs" id="hero-specs" role="list">
+            <div class="hero__spec-item" role="listitem">
+              <dt class="spec-meta">Potencia</dt>
+              <dd class="spec-num">630 <span class="spec-unit">CV</span></dd>
+            </div>
+            <div class="spec-divider" aria-hidden="true"></div>
+            <div class="hero__spec-item" role="listitem">
+              <dt class="spec-meta">0–100 km/h</dt>
+              <dd class="spec-num">3.2 <span class="spec-unit">seg</span></dd>
+            </div>
+            <div class="spec-divider" aria-hidden="true"></div>
+            <div class="hero__spec-item" role="listitem">
+              <dt class="spec-meta">Vel. máx.</dt>
+              <dd class="spec-num">315 <span class="spec-unit">km/h</span></dd>
+            </div>
+            <div class="spec-divider" aria-hidden="true"></div>
+            <div class="hero__spec-item" role="listitem">
+              <dt class="spec-meta">Transmisión</dt>
+              <dd class="spec-num spec-num--sm">MCT 9v</dd>
+            </div>
+          </dl>
+
+          <div class="hero__actions">
+            <a href="#contacto" class="btn btn--solid" id="hero-cta">Solicitar ficha técnica</a>
+            <a href="#inventario" class="btn btn--ghost" id="hero-secondary">Ver inventario</a>
+          </div>
+        </div>
+
+        <!-- Columna imagen derecha -->
+        <figure class="hero__figure" aria-label="Mercedes-AMG GT 63 S">
+          <img
+            src="img/hero.jpg"
+            alt="Mercedes-AMG GT 63 S en espacio arquitectónico de hormigón con luz lateral cenital"
+            class="hero__img"
+            id="hero-img"
+            loading="eager"
+            fetchpriority="high"
+            width="1392"
+            height="928"
+          />
+          <!-- Price tag -->
+          <figcaption class="hero__price-tag" id="hero-price">
+            <span class="hero__price-meta">Precio de lista</span>
+            <span class="hero__price-val">USD&nbsp;198.900</span>
+          </figcaption>
+        </figure>
+
+      </div><!-- /hero__layout -->
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-label">Scroll</span>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════ MANIFESTO ═════════════════════════ -->
+    <section class="manifesto" id="manifesto" aria-label="Filosofía de selección">
+      <div class="manifesto__inner">
+
+        <div class="manifesto__meta">
+          <span class="overline">Criterio sobre cantidad</span>
+        </div>
+
+        <div class="manifesto__statement">
+          <p class="manifesto__quote">
+            Cada vehículo en nuestro inventario pasa por un proceso de selección riguroso. No vendemos autos — representamos piezas de ingeniería que merecen documentarse con precisión.
+          </p>
+          <p class="manifesto__sub">Fundada en 2008 — Buenos Aires, Argentina</p>
+        </div>
+
+        <!-- Bento stat -->
+        <div class="manifesto__stat" aria-label="Unidades disponibles actualmente">
+          <span class="stat-num">12</span>
+          <span class="stat-label">unidades<br />disponibles</span>
+        </div>
+
+      </div>
+      <hr class="rule" />
+    </section>
+
+    <!-- ══════════════════════════ INVENTARIO ════════════════════════ -->
+    <section class="inventory" id="inventario" aria-label="Inventario de vehículos">
+      <div class="inventory__head">
+        <div class="inventory__title-block">
+          <span class="overline">Inventario actual</span>
+          <h2 class="section-title">Selección<br /><em>en stock</em></h2>
+        </div>
+
+        <div class="inventory__controls">
+          <div class="filter-group" role="group" aria-label="Filtrar por categoría">
+            <button class="filter-btn is-active" id="filter-all"   data-filter="all"    type="button">Todos</button>
+            <button class="filter-btn"           id="filter-sport" data-filter="sport"  type="button">Sport</button>
+            <button class="filter-btn"           id="filter-suv"   data-filter="suv"    type="button">SUV</button>
+            <button class="filter-btn"           id="filter-sedan" data-filter="sedan"  type="button">Sedán</button>
+          </div>
+          <a href="#contacto" class="text-link" id="inventory-all-link">
+            Ver inventario completo
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grid bento asimétrico -->
+      <div class="inventory__grid" id="inventory-grid" role="list">
+
+        <!-- CARD 01 — BMW M4 -->
+        <article
+          class="vehicle-card"
+          id="card-bmw-m4"
+          data-category="sport"
+          role="listitem"
+          style="--index: 0"
+        >
+          <a href="#contacto" class="card-img-link" id="card-bmw-link" aria-label="Ver ficha BMW M4 Competition">
+            <figure class="card-figure">
+              <img
+                src="img/car-01.jpg"
+                alt="BMW M4 Competition negro mate, vista tres cuartos frontal en estudio blanco"
+                class="card-img"
+                id="car-01-img"
+                loading="lazy"
+                width="1260"
+                height="840"
+              />
+              <div class="card-tag card-tag--sport" aria-label="Categoría: Sport">Sport</div>
+            </figure>
+          </a>
+
+          <div class="card-body">
+            <header class="card-header">
+              <div class="card-identity">
+                <p class="card-brand" id="card-bmw-brand">BMW</p>
+                <h3 class="card-model" id="card-bmw-model">M4 Competition</h3>
+              </div>
+              <span class="card-year" id="card-bmw-year" aria-label="Año 2024">2024</span>
+            </header>
+
+            <dl class="card-specs" id="card-bmw-specs">
+              <div class="spec-row">
+                <dt>Kilometraje</dt>
+                <dd>12.400 km</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Transmisión</dt>
+                <dd>M DCT 8v</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Motor</dt>
+                <dd>3.0L Biturbo</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Potencia</dt>
+                <dd>510 CV</dd>
+              </div>
+            </dl>
+
+            <footer class="card-footer">
+              <div class="card-price-block">
+                <span class="card-price-meta">Precio</span>
+                <span class="card-price" id="card-bmw-price">USD 89.500</span>
+              </div>
+              <a href="#contacto" class="btn btn--solid btn--sm" id="card-bmw-cta">Consultar</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- CARD 02 — Porsche 911 -->
+        <article
+          class="vehicle-card vehicle-card--featured"
+          id="card-porsche-911"
+          data-category="sport"
+          role="listitem"
+          style="--index: 1"
+        >
+          <a href="#contacto" class="card-img-link" id="card-porsche-link" aria-label="Ver ficha Porsche 911 Carrera S">
+            <figure class="card-figure">
+              <img
+                src="img/car-02.jpg"
+                alt="Porsche 911 Carrera S plateado, vista tres cuartos trasera en estudio gris claro"
+                class="card-img"
+                id="car-02-img"
+                loading="lazy"
+                width="1260"
+                height="840"
+              />
+              <div class="card-tag card-tag--sport" aria-label="Categoría: Sport">Sport</div>
+            </figure>
+          </a>
+
+          <div class="card-body">
+            <header class="card-header">
+              <div class="card-identity">
+                <p class="card-brand" id="card-porsche-brand">Porsche</p>
+                <h3 class="card-model" id="card-porsche-model">911 Carrera S</h3>
+              </div>
+              <span class="card-year" id="card-porsche-year" aria-label="Año 2024">2024</span>
+            </header>
+
+            <dl class="card-specs" id="card-porsche-specs">
+              <div class="spec-row">
+                <dt>Kilometraje</dt>
+                <dd>8.200 km</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Transmisión</dt>
+                <dd>PDK 8v</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Motor</dt>
+                <dd>3.0L Biturbo</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Potencia</dt>
+                <dd>450 CV</dd>
+              </div>
+            </dl>
+
+            <footer class="card-footer">
+              <div class="card-price-block">
+                <span class="card-price-meta">Precio</span>
+                <span class="card-price" id="card-porsche-price">USD 142.000</span>
+              </div>
+              <a href="#contacto" class="btn btn--solid btn--sm" id="card-porsche-cta">Consultar</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- CARD 03 — Audi RS6 -->
+        <article
+          class="vehicle-card"
+          id="card-audi-rs6"
+          data-category="sedan"
+          role="listitem"
+          style="--index: 2"
+        >
+          <a href="#contacto" class="card-img-link" id="card-audi-link" aria-label="Ver ficha Audi RS6 Avant">
+            <figure class="card-figure">
+              <img
+                src="img/car-03.jpg"
+                alt="Audi RS6 Avant azul marino en perfil sobre fondo blanco roto"
+                class="card-img"
+                id="car-03-img"
+                loading="lazy"
+                width="1260"
+                height="840"
+              />
+              <div class="card-tag card-tag--sedan" aria-label="Categoría: Sedán">Sedán</div>
+            </figure>
+          </a>
+
+          <div class="card-body">
+            <header class="card-header">
+              <div class="card-identity">
+                <p class="card-brand" id="card-audi-brand">Audi</p>
+                <h3 class="card-model" id="card-audi-model">RS6 Avant</h3>
+              </div>
+              <span class="card-year" id="card-audi-year" aria-label="Año 2025">2025</span>
+            </header>
+
+            <dl class="card-specs" id="card-audi-specs">
+              <div class="spec-row">
+                <dt>Kilometraje</dt>
+                <dd>3.100 km</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Transmisión</dt>
+                <dd>Tiptronic 8v</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Motor</dt>
+                <dd>4.0L TFSI V8</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Potencia</dt>
+                <dd>600 CV</dd>
+              </div>
+            </dl>
+
+            <footer class="card-footer">
+              <div class="card-price-block">
+                <span class="card-price-meta">Precio</span>
+                <span class="card-price" id="card-audi-price">USD 118.500</span>
+              </div>
+              <a href="#contacto" class="btn btn--solid btn--sm" id="card-audi-cta">Consultar</a>
+            </footer>
+          </div>
+        </article>
+
+      </div><!-- /inventory__grid -->
+    </section>
+
+    <!-- ══════════════════════════ TASACIÓN ══════════════════════════ -->
+    <section class="appraisal" id="tasacion" aria-label="Servicio de tasación de vehículos">
+      <div class="appraisal__layout">
+
+        <!-- Columna editorial -->
+        <div class="appraisal__editorial">
+          <span class="overline">Servicio de tasación</span>
+          <h2 class="section-title appraisal__title">
+            ¿Cuánto<br />vale tu<br /><em>vehículo?</em>
+          </h2>
+          <p class="appraisal__desc">
+            Completá los datos y nuestro equipo técnico elaborará una tasación sin cargo en menos de 24 horas. Proceso directo y confidencial.
+          </p>
+
+          <!-- Promise list — numerada con mono -->
+          <ul class="promise-list" id="appraisal-promises" aria-label="Compromisos del servicio">
+            <li class="promise-item">
+              <kbd class="promise-num">01</kbd>
+              <span>Tasación sin cargo</span>
+            </li>
+            <li class="promise-item">
+              <kbd class="promise-num">02</kbd>
+              <span>Respuesta en 24 h</span>
+            </li>
+            <li class="promise-item">
+              <kbd class="promise-num">03</kbd>
+              <span>100 % confidencial</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Formulario -->
+        <div class="appraisal__form-wrap">
+          <form class="appraisal-form" id="appraisal-form" novalidate aria-label="Formulario de tasación de vehículo">
+
+            <div class="form-row form-row--2col">
+              <div class="form-group">
+                <label class="form-label" for="ap-brand">Marca</label>
+                <input
+                  type="text" id="ap-brand" name="brand"
+                  class="form-input" placeholder="Ej: Porsche"
+                  autocomplete="off" required aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-model">Modelo</label>
+                <input
+                  type="text" id="ap-model" name="model"
+                  class="form-input" placeholder="Ej: Cayenne GTS"
+                  autocomplete="off" required aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div class="form-row form-row--2col">
+              <div class="form-group">
+                <label class="form-label" for="ap-year">Año</label>
+                <input
+                  type="number" id="ap-year" name="year"
+                  class="form-input" placeholder="2021"
+                  min="1990" max="2026" required aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-km">Kilometraje</label>
+                <input
+                  type="number" id="ap-km" name="km"
+                  class="form-input" placeholder="Ej: 42.000"
+                  min="0" required aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div class="form-row form-row--2col">
+              <div class="form-group">
+                <label class="form-label" for="ap-transmission">Transmisión</label>
+                <div class="form-select-wrap">
+                  <select id="ap-transmission" name="transmission" class="form-select" required aria-required="true">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatica">Automática</option>
+                    <option value="dct">DCT / PDK</option>
+                    <option value="cvt">CVT</option>
+                  </select>
+                  <i class="ph ph-caret-down form-select-icon" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-color">Color exterior</label>
+                <input
+                  type="text" id="ap-color" name="color"
+                  class="form-input" placeholder="Ej: Slate Grey Metallic"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <!-- Estado general -->
+            <div class="form-row">
+              <div class="form-group">
+                <span class="form-label" id="condition-legend">Estado general</span>
+                <div class="radio-group" role="radiogroup" aria-labelledby="condition-legend">
+                  <label class="radio-opt" for="cond-excelente">
+                    <input type="radio" id="cond-excelente" name="condition" value="excelente" />
+                    <span class="radio-mark" aria-hidden="true"></span>
+                    Excelente
+                  </label>
+                  <label class="radio-opt" for="cond-muy-bueno">
+                    <input type="radio" id="cond-muy-bueno" name="condition" value="muy-bueno" />
+                    <span class="radio-mark" aria-hidden="true"></span>
+                    Muy bueno
+                  </label>
+                  <label class="radio-opt" for="cond-bueno">
+                    <input type="radio" id="cond-bueno" name="condition" value="bueno" />
+                    <span class="radio-mark" aria-hidden="true"></span>
+                    Bueno
+                  </label>
+                  <label class="radio-opt" for="cond-regular">
+                    <input type="radio" id="cond-regular" name="condition" value="regular" />
+                    <span class="radio-mark" aria-hidden="true"></span>
+                    Regular
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row form-row--2col">
+              <div class="form-group">
+                <label class="form-label" for="ap-name">Nombre completo</label>
+                <input
+                  type="text" id="ap-name" name="full-name"
+                  class="form-input" placeholder="Tu nombre"
+                  autocomplete="name" required aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ap-phone">WhatsApp / Teléfono</label>
+                <input
+                  type="tel" id="ap-phone" name="phone"
+                  class="form-input" placeholder="+54 9 11 0000-0000"
+                  autocomplete="tel" required aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="ap-notes">Observaciones</label>
+                <textarea
+                  id="ap-notes" name="notes"
+                  class="form-textarea"
+                  placeholder="Accidentes previos, modificaciones, service al día, documentación…"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn--solid btn--lg" id="appraisal-submit">
+                <span id="submit-label">Solicitar tasación</span>
+                <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </button>
+              <p class="form-privacy">
+                Tus datos son tratados con total confidencialidad y no se comparten con terceros.
+              </p>
+            </div>
+
+            <!-- Estado de éxito -->
+            <div class="form-success" id="form-success" role="alert" aria-live="polite" hidden>
+              <i class="ph-fill ph-check-circle form-success__icon" aria-hidden="true"></i>
+              <p>Tu solicitud fue recibida. Te contactamos dentro de las próximas 24 horas hábiles.</p>
+            </div>
+
+          </form>
+        </div>
+
+      </div><!-- /appraisal__layout -->
+    </section>
+
+    <!-- ══════════════════════════ FOOTER / CONTACTO ══════════════════ -->
+    <footer class="site-footer" id="contacto" role="contentinfo">
+      <hr class="rule" />
+      <div class="site-footer__inner">
+
+        <div class="footer-brand">
+          <a href="#" class="nav__logo footer-brand__logo" id="footer-logo" aria-label="VERITAS Motor — inicio">
+            <span class="logo-serif">V</span><span class="logo-sans">ERITAS</span>
+          </a>
+          <p class="footer-brand__tag">Ingeniería que merece documentarse.</p>
+        </div>
+
+        <div class="footer-contact" id="footer-contact">
+          <p class="footer-col-title">Contacto directo</p>
+          <a href="tel:+541148000000" class="footer-link" id="footer-phone">+54 11 4800-0000</a>
+          <a href="mailto:info@veritas-motor.com.ar" class="footer-link" id="footer-email">info@veritas-motor.com.ar</a>
+          <address class="footer-address" id="footer-address">
+            Av. del Libertador 8600<br />CABA, Buenos Aires
+          </address>
+        </div>
+
+        <div class="footer-hours" id="footer-hours">
+          <p class="footer-col-title">Horario de atención</p>
+          <p>Lun — Vie: 9:00 — 19:00</p>
+          <p>Sábados: 10:00 — 14:00</p>
+          <p>Domingos: cerrado</p>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="footer-legal">© 2025 VERITAS Motor Group. Todos los derechos reservados.</p>
+        <nav class="footer-legal-nav" aria-label="Legal">
+          <a href="#" id="footer-privacy">Privacidad</a>
+          <a href="#" id="footer-terms">Términos de uso</a>
+        </nav>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
